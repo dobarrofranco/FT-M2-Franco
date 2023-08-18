@@ -1,7 +1,7 @@
 let img = $("img");
 img.hide();
 
-$("#boton").on("click", function() {
+let getHandler = function() {
     img.show();
     $.ajax({
         type: "GET",
@@ -20,10 +20,9 @@ $("#boton").on("click", function() {
             
         }
     })
-})
+}
 
-
-$("#search").click (() => {
+let searchHandler = (() => {
     let entrada = $("#input").val();
     img.show();
 
@@ -33,7 +32,7 @@ $("#search").click (() => {
         success: data => {
             let size;
             size = data.length;
-            if (entrada > size || entrada !== data.id) {
+            if (entrada > size) {
                 $("#amigo").text('Este amigo no existe');
             }
             $("#input").val("");
@@ -58,14 +57,7 @@ $("#search").click (() => {
     
 })
 
-
-let inputClean = (() => {
-    $("#input").val();
-    $("#inputDelete").val();
-});
-
-
-$("#delete").click (() => {
+let deleteHandler = (() => {
     let entradaDelete = $("#inputDelete").val();
 
     $.ajax({
@@ -86,7 +78,7 @@ $("#delete").click (() => {
     $.ajax ({
         type: "DELETE",
         url: `http://localhost:5000/amigos/${entradaDelete}`,
-        success: data => {
+        success: () => {
             
             // if (entradaDelete !== data.id) {
             //     $("#success").text('Este amigo no existe')
@@ -94,6 +86,7 @@ $("#delete").click (() => {
             
             $("#success").text('Tu amigo fue borrado con éxito');
             
+            getHandler();
 
             $("#inputDelete").val("")
 
@@ -102,3 +95,8 @@ $("#delete").click (() => {
     })
 })
 
+$("#delete").on("click", deleteHandler);
+
+$("#boton").on("click", getHandler);
+
+$("#search").on("click", searchHandler); 
