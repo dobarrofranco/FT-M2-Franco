@@ -4,7 +4,17 @@
 }
 
 .danger {
-  font-size: 10px;
+  font-size: 16px;
   color: red;
-  margin-left: 10em;
+  margin: 0 auto;
+}
+
+.formulario {
+  text-align: center;
+}
+
+.formulario-tittle {
+  font-size: 20px;
+  margin: 0 auto;
+  padding-top: 30px;
 }
